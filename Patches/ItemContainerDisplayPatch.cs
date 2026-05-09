@@ -10,7 +10,7 @@ public class ItemContainerDisplayPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemContainerDisplay.UpdateHighlights))]
-    public static void UpdateHighlights_Postfix(ItemContainerDisplay __instance, ItemContainer ic)
+    public static void UpdateHighlights_Postfix(ItemContainerDisplay __instance, ItemContainer ic, ref IntVec2 hoverSlot)
     {
         if (!InventoryTweaks.tierBasedColors)
             return;
@@ -57,7 +57,14 @@ public class ItemContainerDisplayPatch
                 if ((colorIndex == 1 || colorIndex == 2) && tierColors[index].HasValue)
                 {
                     var finalColor = tierColors[index].Value;
-                    finalColor.a = 0.1f;
+                    if (hoverSlot.x == m && hoverSlot.y == n)
+                    {
+                        finalColor.a = 0.2f;
+                    }
+                    else
+                    {
+                        finalColor.a = 0.1f;
+                    }
                     gridSquare[index].color = finalColor;
                 }
             }
