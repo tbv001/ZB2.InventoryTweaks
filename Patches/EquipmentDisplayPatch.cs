@@ -7,9 +7,10 @@ public class EquipmentDisplayPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(EquipmentDisplay.UpdateHighlights))]
-    public static void UpdateHighlights_Postfix(EquipmentDisplay __instance, PlayerInventory targetInventory, int highlightIndex)
+    public static void UpdateHighlights_Postfix(EquipmentDisplay __instance, PlayerInventory targetInventory,
+        int highlightIndex)
     {
-        if (!InventoryTweaks.tierBasedColors)
+        if (!InventoryTweaks.TierBasedColors)
             return;
 
         for (int i = 0; i < __instance.equipmentSlot.Length; i++)

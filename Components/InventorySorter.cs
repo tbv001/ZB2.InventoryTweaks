@@ -45,8 +45,7 @@ public class InventorySorter : MonoBehaviour
         dontSendNotifications = true;
         var items = new List<InventoryItem>(curInventory.storage.items);
 
-        items.Sort(
-            (a, b) =>
+        items.Sort((a, b) =>
             {
                 var dbA = a.GetDataBaseItem();
                 var dbB = b.GetDataBaseItem();
@@ -54,7 +53,7 @@ public class InventorySorter : MonoBehaviour
                 var tierComp = dbB.tier.CompareTo(dbA.tier); // Highest tier first
                 var typeComp = dbA.GetSubType().CompareTo(dbB.GetSubType()); // Subtype
 
-                var sortByTier = InventoryTweaks.firstSortBy == FirstSortBy.Tier;
+                var sortByTier = InventoryTweaks.FirstSortBy == FirstSortBy.Tier;
                 var primary = sortByTier ? tierComp : typeComp;
                 var secondary = sortByTier ? typeComp : tierComp;
 

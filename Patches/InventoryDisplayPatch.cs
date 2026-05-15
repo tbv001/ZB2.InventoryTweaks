@@ -18,7 +18,7 @@ public class InventoryDisplayPatch
         InventorySorter.curInventory = playerMain.inventory;
         InventorySorter.showGui = true;
 
-        if (InventoryTweaks.autoSortOnOpen)
+        if (InventoryTweaks.AutoSortOnOpen)
         {
             InventorySorter.SortItems();
         }
@@ -47,12 +47,7 @@ public class InventoryDisplayPatch
                 var inventory = __instance.targetInventory;
                 if (__instance.hoverContainer == InventoryDisplay.ContainerType.Equipment)
                 {
-                    var pos = inventory.FindPlaceFor(
-                        hoveredItem.id,
-                        hoveredItem.stackCount,
-                        true,
-                        false
-                    );
+                    var pos = inventory.FindPlaceFor(hoveredItem.id, hoveredItem.stackCount, true, false);
 
                     if (pos != null)
                     {
@@ -60,20 +55,14 @@ public class InventoryDisplayPatch
                         inventory.PutLootIntoPosition(hoveredItem, pos, false);
                         __instance.Show(inventory);
                         AudioController.instance.PlayUI(AudioController.UIFXID.InventoryRelease);
-
-                        return false;
                     }
 
                     return false;
                 }
-                else if (__instance.hoverContainer == InventoryDisplay.ContainerType.Inventory)
+
+                if (__instance.hoverContainer == InventoryDisplay.ContainerType.Inventory)
                 {
-                    var pos = inventory.FindPlaceFor(
-                        hoveredItem.id,
-                        hoveredItem.stackCount,
-                        true,
-                        true
-                    );
+                    var pos = inventory.FindPlaceFor(hoveredItem.id, hoveredItem.stackCount, true, true);
 
                     if (pos != null && pos.AutoEquip)
                     {
@@ -96,39 +85,24 @@ public class InventoryDisplayPatch
 
                             inventory.RemoveItem(hoveredItem);
 
-                            var storagePos = inventory.FindPlaceFor(
-                                currentEquip.id,
-                                currentEquip.stackCount,
-                                true,
-                                false
-                            );
+                            var storagePos =
+                                inventory.FindPlaceFor(currentEquip.id, currentEquip.stackCount, true, false);
 
                             if (storagePos != null)
                             {
                                 inventory.RemoveEquippedItem(subType);
                                 inventory.PutLootIntoPosition(currentEquip, storagePos, false);
 
-                                var equipPos = new LootTargetPosition
-                                {
-                                    targetEquipmentIndex = subType,
-                                };
+                                var equipPos = new LootTargetPosition { targetEquipmentIndex = subType };
                                 inventory.PutLootIntoPosition(hoveredItem, equipPos, false);
 
                                 __instance.Show(inventory);
-                                AudioController.instance.PlayUI(
-                                    AudioController.UIFXID.InventoryEquip
-                                );
-
-                                return false;
+                                AudioController.instance.PlayUI(AudioController.UIFXID.InventoryEquip);
                             }
                             else
                             {
                                 var revertPos = new LootTargetPosition
-                                {
-                                    addNewItemToStorage = true,
-                                    containerPos = backupPos,
-                                    rotated = backupRot,
-                                };
+                                    { addNewItemToStorage = true, containerPos = backupPos, rotated = backupRot };
                                 inventory.PutLootIntoPosition(hoveredItem, revertPos, false);
                             }
                         }
@@ -138,6 +112,7 @@ public class InventoryDisplayPatch
                 }
             }
         }
+
         return true;
     }
 }

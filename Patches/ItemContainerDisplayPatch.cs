@@ -10,9 +10,10 @@ public class ItemContainerDisplayPatch
 {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(ItemContainerDisplay.UpdateHighlights))]
-    public static void UpdateHighlights_Postfix(ItemContainerDisplay __instance, ItemContainer ic, ref IntVec2 hoverSlot)
+    public static void UpdateHighlights_Postfix(ItemContainerDisplay __instance, ItemContainer ic,
+        ref IntVec2 hoverSlot)
     {
-        if (!InventoryTweaks.tierBasedColors)
+        if (!InventoryTweaks.TierBasedColors)
             return;
 
         var traverse = Traverse.Create(__instance);
@@ -65,6 +66,7 @@ public class ItemContainerDisplayPatch
                     {
                         finalColor.a = 0.1f;
                     }
+
                     gridSquare[index].color = finalColor;
                 }
             }
