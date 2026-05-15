@@ -11,7 +11,7 @@
 ## Installation
 
 1. Make sure you have the latest version of **BepInEx 5** installed.
-2. Download the latest DLL at the [releases](https://github.com/tbv001/ZB2.InventoryTweaks/releases) page.
+2. Download the latest version of the mod at the [releases](https://github.com/tbv001/ZB2.InventoryTweaks/releases) page.
 3. Copy the DLL into the `plugins` folder of your BepInEx installation:
 
 ```
