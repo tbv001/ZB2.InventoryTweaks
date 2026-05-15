@@ -6,7 +6,7 @@
 
 - Automatically sort items in the inventory with a button press or when opening the inventory.
 - Shift-clicking an equippable item in the inventory will equip it or swap with an occupied equip slot. And shift-clicking an equipped item will unequip it.
-- Coloring for the inventory slots based on the item tier in the slot.
+- Coloring for the inventory and equipment slots based on the item tier in the slot.
 
 ## Installation
 
